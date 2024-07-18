@@ -1,0 +1,49 @@
+<div class="container p-4">
+
+  <div class="mb-5">
+    <h2><strong>Movie catalog</strong></h2>
+    <%= form_with url: movie_infos_path, method: :get, class: "d-flex mt-3 search-bar-home", data: {
+        controller: 'search',
+        action: 'keyup->search#searchQuery',
+        save_search_query_url: create_search_query_path
+      }  do |form| %>
+
+      <div class="relative-container" style="position: relative; width: 100%;">
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control bg-white",
+          placeholder:"Search any movie title...",
+          required: true,
+          autocomplete: "off",
+          data: { search_target: 'input' }
+        %>
+      </div>
+
+      <%= button_tag type: 'submit', class: "btn btn-primary" do %>
+        <i class="fas fa-search"></i>
+      <% end %>
+
+
+    <% end %>
+
+    <%= link_to "See my search analytics", search_queries_path, class: "btn btn-primary mt-4" , style: 'border-radius: 8px;' %>
+  </div>
+
+
+  <% if @movie_infos.present? %>
+    <% @movie_infos.each do |movie_info| %>
+      <div class="container p-3 mt-3 mb-3 shadow" style="border-radius:8px; border: 1px solid gray;">
+        <h3><strong><%= movie_info.title %></strong></h3>
+        <h4><strong>Quote:</strong> <%= movie_info.quote %></h4>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center mt-5">
+        <h3>No movies were found :(</h3>
+
+        <%= link_to "Back", movie_infos_path, class: "btn btn-primary btn-lg mt-4" , style: 'border-radius: 8px;' %>
+    </div>
+  <% end %>
+
+
+</div>

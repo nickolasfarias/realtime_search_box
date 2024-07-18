@@ -1,0 +1,82 @@
+<div class="container p-4">
+
+  <div class="mb-3">
+    <h2><strong>Search analytics</strong>
+      <small>
+        <% if @is_my_ip %>
+          (Tracking your ip: <%= @user_ip %>)
+        <% else %>
+          (Tracking ip: <%= @user_ip %>)
+        <% end %>
+      </small>
+    </h2>
+    <hr>
+  </div>
+
+  <div class="mb-3">
+    <label for="user_ip">See other people activities:</label>
+    <%= form_with url: search_queries_path, method: :get, local: true, class: 'form-inline d-flex align-items-center' do %>
+      <div class="form-group mr-2" style='width: 60vw;'>
+        <%= select_tag :user_ip, options_for_select(@all_ips, @user_ip), required: true, class: "form-control" %>
+      </div>
+      <%= submit_tag "Filter", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+
+
+<% if @my_queries.present? %>
+  <%= link_to "Search another movie", movie_infos_path, class: "btn btn-primary mt-4 mb-5" , style: 'border-radius: 8px;' %>
+
+  <div>
+    <% if @is_my_ip %>
+      <h3 class="mb-5">My most searched queries</h3>
+    <% else %>
+      <h3 class="mb-5">Most searched queries</h3>
+    <% end %>
+  </div>
+
+    <% @my_top_queries.keys.each do |key| %>
+      <div class="container p-3 mt-3 mb-3 shadow" style="border-radius:8px; border: 1px solid gray;">
+        <h3>
+          <strong>Searched term:</strong> <%= key %>
+        </h3>
+        <h4>
+          <strong>Count:</strong> <%= @my_top_queries[key] %>
+        </h4>
+      </div>
+    <% end %>
+
+
+
+
+    <div>
+      <% if @is_my_ip %>
+        <h3 class="mb-5 mt-5">All my search logs</h3>
+      <% else %>
+        <h3 class="mb-5 mt-5">All search logs</h3>
+      <% end %>
+    </div>
+
+    <% @my_ordered_queries.each do |search_query| %>
+      <div class="container p-3 mt-3 mb-3 shadow" style="border-radius:8px; border: 1px solid gray;">
+        <h3>
+          <strong>Searched term:</strong> <%= search_query.query %>
+        </h3>
+        <h4>
+          <strong>Made by ip:</strong> <%= search_query.user_ip %>
+        </h4>
+        <h4>
+          <strong>When it was searched:</strong> <%= time_ago_in_words(search_query.created_at) %> ago
+        </h4>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-center mt-5">
+        <h3>You didn't search for any movie :(</h3>
+
+        <%= link_to "See movie catalog", movie_infos_path, class: "btn btn-primary mt-4" , style: 'border-radius: 8px;' %>
+    </div>
+
+  <% end %>
+</div>
