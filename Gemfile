@@ -55,9 +55,11 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'faker'
 gem "pg_search"
+gem 'rspec-rails'
 
 group :development, :test do
   gem "dotenv-rails"
+  gem 'factory_bot_rails'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
@@ -75,6 +77,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem 'rails-controller-testing'
   gem "capybara"
   gem "selenium-webdriver"
 
