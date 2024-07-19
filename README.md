@@ -61,5 +61,26 @@ The application includes RSpec tests for the `SearchQueriesController`. The cont
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/realtime_search_box.git
+   git clone https://github.com/nickolasfarias/realtime_search_box.git
    cd realtime_search_box
+
+2. **Install dependencies:**
+
+   ```sh
+   bundle install
+
+3. **Set up the database::**
+
+   ```sh
+   rails db:create
+   rails db:migrate
+
+4. **Seed the database:**
+
+   ```sh
+   rails db:seed
+
+5. **Run the server:**
+
+   ```sh
+   rails server
