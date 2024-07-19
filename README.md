@@ -52,8 +52,8 @@ The application includes RSpec tests for the `SearchQueriesController`. The cont
 
 ### Prerequisites
 
-- Ruby (version 2.7.0 or higher)
-- Rails (version 6.0 or higher)
+- Ruby (version 3.1.2 or higher)
+- Rails (version 7.0 or higher)
 - PostgreSQL (or another database of your choice)
 
 ### Installation
